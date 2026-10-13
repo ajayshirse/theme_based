@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ThemeBase — Website Builder Demo</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #fff;
+      --text: #172033;
+      --muted: #748096;
+      --line: #e8ebf2;
+      --primary: #5b5bd6;
+      --primary2: #706cf0;
+      --dark: #151a2d;
+      --success: #17a673;
+      --danger: #e45b6f;
+      --shadow: 0 12px 35px rgba(35, 43, 72, .08);
+      --radius: 18px
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex
+    }
+
+    .sidebar {
+      width: 248px;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      position: fixed;
+      inset: 0 auto 0 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 15px;
+      z-index: 30
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 10px 24px;
+      font-weight: 800;
+      font-size: 21px
+    }
+
+    .brandmark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #5b5bd6, #8b78ff);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 8px 18px #5b5bd633
+    }
+
+    .brand small {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .13em;
+      color: #9aa2b4;
+      text-transform: uppercase;
+      font-weight: 700
+    }
+
+    .nav-title {
+      font-size: 11px;
+      color: #a1a8b7;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 800;
+      padding: 9px 12px
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px
+    }
+
+    .nav button {
+      border: 0;
+      background: transparent;
+      color: #667085;
+      padding: 12px 13px;
+      border-radius: 11px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 600
+    }
+
+    .nav button:hover {
+      background: #f5f5ff;
+      color: var(--primary)
+    }
+
+    .nav button.active {
+      background: #eeefff;
+      color: var(--primary);
+      font-weight: 750
+    }
+
+    .ico {
+      width: 20px;
+      text-align: center;
+      font-size: 16px
+    }
+
+    .create-side {
+      margin-top: auto;
+      background: linear-gradient(135deg, #5b5bd6, #7d6cf1);
+      border: 0;
+      color: #fff;
+      border-radius: 13px;
+      padding: 13px 15px;
+      font-weight: 750;
+      box-shadow: 0 10px 24px #5b5bd633
+    }
+
+    .userbox {
+      margin-top: 14px;
+      padding: 11px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #edeefe;
+      color: var(--primary);
+      font-weight: 800
+    }
+
+    .main {
+      margin-left: 248px;
+      width: calc(100% - 248px);
+      min-width: 0
+    }
+
+    .topbar {
+      height: 70px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      gap: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 20
+    }
+
+    .hamb {
+      display: none;
+      border: 0;
+      background: transparent;
+      font-size: 24px
+    }
+
+    .search {
+      height: 40px;
+      max-width: 460px;
+      flex: 1;
+      background: #f6f7fb;
+      border: 1px solid #eef0f5;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      padding: 0 13px;
+      color: #a0a7b5
+    }
+
+    .search input {
+      border: 0;
+      outline: 0;
+      background: transparent;
+      width: 100%;
+      padding: 0 9px;
+      color: var(--text)
+    }
+
+    .top-spacer {
+      flex: 1
+    }
+
+    .top-action {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 9px 12px;
+      color: #5d6679
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700
+    }
+
+    .content {
+      padding: 28px 30px 40px;
+      max-width: 1600px;
+      margin: auto
+    }
+
+    .pagehead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 22px
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em
+    }
+
+    .pagehead h1 {
+      font-size: 28px;
+      margin: 5px 0 5px;
+      letter-spacing: -.02em
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 15px;
+      font-weight: 750;
+      box-shadow: 0 7px 17px #5b5bd626
+    }
+
+    .btn:hover {
+      background: #4d4dc7
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: #505a70;
+      border: 1px solid var(--line);
+      box-shadow: none
+    }
+
+    .btn.danger {
+      background: #fff;
+      color: var(--danger);
+      border: 1px solid #f1d6dc;
+      box-shadow: none
+    }
+
+    .btn.small {
+      padding: 8px 11px;
+      font-size: 12px
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px
+    }
+
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr))
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 19px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden
+    }
+
+    .stat:after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #f0efff;
+      right: -35px;
+      top: -35px
+    }
+
+    .stat .label {
+      color: #7b8496;
+      font-size: 13px
+    }
+
+    .stat .value {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 7px 0
+    }
+
+    .stat .trend {
+      font-size: 12px;
+      color: var(--success);
+      font-weight: 700
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 18px;
+      margin-top: 18px
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px
+    }
+
+    .cardhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 16px
+    }
+
+    .cardhead h2 {
+      font-size: 17px;
+      margin: 0
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px
+    }
+
+    .template {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      overflow: hidden;
+      background: #fff;
+      transition: .2s
+    }
+
+    .template:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(30, 40, 80, .1)
+    }
+
+    .template-shot {
+      height: 145px;
+      background: #eef1f8;
+      position: relative;
+      overflow: hidden
+    }
+
+    .template-shot iframe {
+      width: 900px;
+      height: 700px;
+      transform: scale(.28);
+      transform-origin: top left;
+      border: 0;
+      pointer-events: none;
+      background: #fff
+    }
+
+    .template-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(11, 15, 28, .5));
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 12px
+    }
+
+    .template-name {
+      padding: 13px 14px 4px;
+      font-weight: 800
+    }
+
+    .template-meta {
+      padding: 0 14px 13px;
+      color: var(--muted);
+      font-size: 12px
+    }
+
+    .template-actions {
+      padding: 0 14px 14px;
+      display: flex;
+      gap: 7px
+    }
+
+    .side-card {
+      min-height: 100%
+    }
+
+    .activity {
+      display: grid;
+      gap: 14px
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 10px
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--primary);
+      margin-top: 6px;
+      flex: 0 0 auto
+    }
+
+    .activity b {
+      font-size: 13px
+    }
+
+    .activity span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px
+    }
+
+    .website-list {
+      margin-top: 18px
+    }
+
+    .tablewrap {
+      overflow: auto
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px
+    }
+
+    .table th,
+    .table td {
+      padding: 13px 11px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      font-size: 13px
+    }
+
+    .table th {
+      font-size: 11px;
+      color: #8b94a6;
+      text-transform: uppercase;
+      letter-spacing: .06em
+    }
+
+    .domain {
+      font-weight: 750
+    }
+
+    .status {
+      padding: 5px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      background: #eaf8f2;
+      color: #15845e
+    }
+
+    .empty {
+      text-align: center;
+      padding: 45px 20px;
+      color: var(--muted)
+    }
+
+    .help {
+      background: linear-gradient(145deg, #171c32, #272e50);
+      color: #fff;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 18px
+    }
+
+    .help p {
+      color: #bfc6da;
+      font-size: 13px;
+      line-height: 1.55
+    }
+
+    .help .btn {
+      background: #fff;
+      color: #232947;
+      box-shadow: none
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px
+    }
+
+    .industry {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: var(--shadow)
+    }
+
+    .industry:hover {
+      border-color: #c9c9f6
+    }
+
+    .industry-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: #f0efff;
+      display: grid;
+      place-items: center;
+      font-size: 23px
+    }
+
+    .industry h3 {
+      margin: 13px 0 5px
+    }
+
+    .themegrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .theme-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 12px;
+      text-align: left
+    }
+
+    .theme-card.selected {
+      border: 2px solid var(--primary);
+      padding: 11px
+    }
+
+    .theme-preview {
+      height: 125px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #dfe5ff, #f7f8ff);
+      display: grid;
+      place-items: center;
+      color: #626b82;
+      font-weight: 800;
+      margin-bottom: 10px
+    }
+
+    .theme-card h3 {
+      margin: 5px 0
+    }
+
+    .theme-actions {
+      display: flex;
+      gap: 7px;
+      margin-top: 10px
+    }
+
+    .content-wizard-steps {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding: 4px 2px 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px
+    }
+
+    .content-step {
+      border: 0;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      color: #9aa2b1;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 7px
+    }
+
+    .content-step span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: #fff
+    }
+
+    .content-step.on {
+      color: var(--primary)
+    }
+
+    .content-step.on span,
+    .content-step.done span {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary)
+    }
+
+    .content-editor {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      background: #fff
+    }
+
+    .content-step:hover {
+      color: var(--primary)
+    }
+
+    .steps {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding: 4px 2px 18px
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      color: #9aa2b1;
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    .step i {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      font-style: normal
+    }
+
+    .step.on {
+      color: var(--primary)
+    }
+
+    .step.on i,
+    .step.done i {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary)
+    }
+
+    .fieldgrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px
+    }
+
+    .field {
+      display: grid;
+      gap: 6px
+    }
+
+    .field.full {
+      grid-column: 1/-1
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 750;
+      color: #555f73
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      border: 1px solid #e0e4ed;
+      border-radius: 10px;
+      padding: 11px 12px;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+      width: 100%
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: #a8a8ee;
+      box-shadow: 0 0 0 3px #5b5bd611
+    }
+
+    .checkgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px
+    }
+
+    .check {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start
+    }
+
+    .check input {
+      accent-color: var(--primary);
+      margin-top: 3px
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 18px
+    }
+
+    .right {
+      display: flex;
+      gap: 8px
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 17, 31, .68);
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 20px
+    }
+
+    .modalbox {
+      background: #fff;
+      width: min(1200px, 96vw);
+      height: min(850px, 92vh);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+      display: flex;
+      flex-direction: column
+    }
+
+    .modalbar {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 100%;
+      border: 0
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      background: #182038;
+      color: #fff;
+      padding: 12px 15px;
+      border-radius: 11px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, .2);
+      z-index: 200;
+      font-size: 13px
+    }
+
+    .mobile-overlay {
+      display: none
+    }
+
+    @media(max-width:1100px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .template-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .side-card {
+        min-height: auto
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(min-width:801px) {
+      .layout>aside {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        align-self: stretch
+      }
+
+      .layout>aside .help {
+        height: 100%;
+        margin-top: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+      }
+    }
+
+    @media(max-width:800px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: .25s
+      }
+
+      .sidebar.open {
+        transform: translateX(0)
+      }
+
+      .mobile-overlay.show {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 14, 25, .35);
+        z-index: 25
+      }
+
+      .main {
+        margin-left: 0;
+        width: 100%
+      }
+
+      .hamb {
+        display: block
+      }
+
+      .topbar {
+        padding: 0 16px
+      }
+
+      .profile span {
+        display: none
+      }
+
+      .content {
+        padding: 22px 16px
+      }
+
+      .pagehead {
+        flex-direction: column
+      }
+
+      .template-grid,
+      .themegrid,
+      .checkgrid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .fieldgrid {
+        grid-template-columns: 1fr
+      }
+
+      .field.full {
+        grid-column: auto
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(max-width:520px) {
+
+      .stats,
+      .template-grid,
+      .themegrid,
+      .checkgrid,
+      .section-grid {
+        grid-template-columns: 1fr
+      }
+
+      .search {
+        display: none
+      }
+
+      .topbar {
+        gap: 8px
+      }
+
+      .top-action {
+        display: none
+      }
+
+      .pagehead h1 {
+        font-size: 23px
+      }
+
+      .card {
+        padding: 15px
+      }
+
+      .template-shot {
+        height: 165px
+      }
+
+      .actions {
+        flex-direction: column
+      }
+
+      .right {
+        width: 100%
+      }
+
+      .actions .btn {
+        width: 100%
+      }
+
+      .userbox {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brandmark">T</div>
+        <div>ThemeBase<small>Website Builder</small></div>
+      </div>
+      <div class="nav-title">Workspace</div>
+      <nav class="nav">
+        <button class="active" data-view="dashboard"><span class="ico">▦</span>Dashboard</button>
+        <button data-view="templates"><span class="ico">▧</span>Templates</button>
+        <button data-view="websites"><span class="ico">◫</span>My Websites</button>
+        <button data-view="media"><span class="ico">▣</span>Media Library</button>
+        <button data-view="deployments"><span class="ico">↗</span>Deployments</button>
+        <button data-view="settings"><span class="ico">⚙</span>Settings</button>
+      </nav>
+      <button class="create-side" data-view="create">＋ Create New Website</button>
+      <div class="userbox">
+        <div class="avatar">A</div>
+        <div><b style="font-size:13px">Ajay</b>
+          <div class="sub" style="font-size:11px">Administrator</div>
+        </div>
+      </div>
+    </aside>
+    <div class="mobile-overlay" id="overlay"></div>
+    <main class="main">
+      <header class="topbar"><button class="hamb" id="hamb">☰</button>
+        <div class="search">⌕<input id="search" placeholder="Search templates, websites..."></div>
+        <div class="top-spacer"></div><button class="top-action">? Help</button>
+        <div class="profile">
+          <div class="avatar">A</div><span>Ajay⌄</span>
+        </div>
+      </header>
+      <section class="content" id="app"></section>
+    </main>
+  </div>
+  <div id="modalRoot"></div>
+  <script>
+    const industries = {
+      Dental: { emoji: '🦷', key: 'Dental' },
+      Ortho: { emoji: '🩺', key: 'Ortho' },
+      Pedia: { emoji: '🧸', key: 'Pedia' }
+    };
+    const templateNames = { Dental: 'Dental', Ortho: 'Ortho', Pedia: 'Pedia' };
+    const storageKey = 'themebase_websites_clean';
+    const activityKey = 'themebase_activity_clean';
+    const save = () => localStorage.setItem(storageKey, JSON.stringify(websites));
+    const loadWebsites = () => {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || []
+      }
+      catch (e) {
+        return []
+      }
+    };
+    let websites = loadWebsites();
+    let activity = (() => {
+      try {
+        return JSON.parse(localStorage.getItem(activityKey)) || []
+      }
+      catch (e) {
+        return []
+      }
+    })();
+    const $ = s => document.querySelector(s);
+    const $$ = s => [...document.querySelectorAll(s)];
+    const app = $('#app');
+    function header(title, sub, button = '') {
+      return
+      `<div class="pagehead">
+        <div>
+          <div class="eyebrow">ThemeBase</div>
+          <h1>${title}</h1>
+          <div class="sub">${sub}</div>
+          </div>${button}</div>`
+    }
+    function escapeHtml(v) {
+      return String(v ?? '').replace(/[&<>"']/g,
+        c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+    }
+    function templateCard(name, industry, theme) { const themeNo = theme.split('-')[1] || '1'; return `<article class="template"><div class="template-shot"><iframe src="templates/${industry}.html?tpl=${industry}-${themeNo}" loading="lazy" title="${name} preview"></iframe><div class="template-overlay"><span class="status">Theme-${themeNo}</span><button class="btn small" type="button" data-template-preview="${industry}" data-template-theme="${themeNo}">Preview</button></div></div><div class="template-name">${name}</div><div class="template-meta">${templateNames[industry]} · Responsive template</div><div class="template-actions"><button class="btn small" type="button" data-use="${industry}">Use Template</button><button class="btn secondary small" type="button" data-template-preview="${industry}" data-template-theme="${themeNo}">Preview</button></div></article>` }
+    function renderDashboard() { const published = websites.filter(w => w.status === 'Published').length; app.innerHTML = header('Dashboard', 'Manage your templates, websites and demo deployments.', `<button class="btn" type="button" data-view="create">＋ Create New Website</button>`) + `<div class="grid stats"><div class="stat"><div class="label">   Templates</div><div class="value">9</div><div class="trend">3 industries · 3 themes</div></div><div class="stat"><div class="label">My Websites</div><div class="value">${websites.length}</div><div class="trend">Your saved projects</div></div><div class="stat"><div class="label">Published Sites</div><div class="value">${published}</div><div class="trend">Ready for preview</div></div><div class="stat"><div class="label">Total Users</div><div class="value">—</div><div class="trend">Backend not connected</div></div></div><div class="layout"><div><div class="card"><div class="cardhead"><div><h2>Featured Templates</h2><div class="sub">Choose a design and preview it before using it.</div></div><button class="btn secondary small" type="button" data-view="templates">View All</button></div><div class="template-grid">${templateCard('Dental Theme 1', 'dental', 'Theme-1')}${templateCard('Ortho Theme 2', 'ortho', 'Theme-2')}${templateCard('Pedia Theme 3', 'pedia', 'Theme-3')}</div></div><div class="card website-list"><div class="cardhead"><div><h2>My Websites</h2><div class="sub">Websites you create will appear here.</div></div><button class="btn secondary small" type="button" data-view="websites">View All</button></div>${websiteTable(websites.slice(0, 4))}</div></div><aside><div class="card side-card"><div class="cardhead"><div><h2>Recent Activity</h2><div class="sub">Your actions in this browser</div></div></div>${activity.length ? `<div class="activity">${activity.slice(0, 5).map(a => `<div class="activity-item"><i class="dot"></i><div><b>${escapeHtml(a.text)}</b><span>${escapeHtml(a.time)}</span></div></div>`).join('')}</div>` : `<div class="empty" style="padding:180px 8px">No activity yet.</div>`}</div><div class="help" style="padding:1px"><b style="font-size:18 px">Need Help?</b><p>Select a template, preview it, enter your domain and publish your website.</p><button class="btn small" type="button" data-view="templates">Explore Templates</button></div></aside></div>` }
+    function websiteTable(list) { if (!list.length) return `<div class="empty"><div style="font-size:34px">🌐</div><p>No websites created yet.</p><button class="btn small" type="button" data-view="create">Create Your First Website</button></div>`; return `<div class="tablewrap"><table class="table"><thead><tr><th>Website</th><th>Industry</th><th>Theme</th><th>Status</th><th>Actions</th></tr></thead><tbody>${list.map(w => `<tr><td class="domain">${escapeHtml(w.domain)}</td><td>${escapeHtml(w.industry)}</td><td>${escapeHtml(w.theme)}</td><td><span class="status">${escapeHtml(w.status)}</span></td><td><div class="right"><button class="btn secondary small" type="button" data-preview-id="${w.id}">Preview</button><button class="btn danger small" type="button" data-delete-id="${w.id}">Delete</button></div></td></tr>`).join('')}</tbody></table></div>` }
+    function renderTemplates() { app.innerHTML = header('Templates', 'Browse every available design and preview before using it.') + `<div class="card"><div class="cardhead"><div><h2>All Templates</h2><div class="sub">3 industries · 3 themes</div></div></div><div class="template-grid">${templateCard('Dental Theme 1', 'dental', 'Theme-1')}${templateCard('Dental Theme 2', 'dental', 'Theme-2')}${templateCard('Dental Theme 3', 'dental', 'Theme-3')}${templateCard('Ortho Theme 1', 'ortho', 'Theme-1')}${templateCard('Ortho Theme 2', 'ortho', 'Theme-2')}${templateCard('Ortho Theme 3', 'ortho', 'Theme-3')}${templateCard('Pedia Theme 1', 'pedia', 'Theme-1')}${templateCard('Pedia Theme 2', 'pedia', 'Theme-2')}${templateCard('Pedia Theme 3', 'pedia', 'Theme-3')}</div></div>` }
+    function renderWebsites() { app.innerHTML = header('My Websites', 'View, preview and manage websites created in this browser.', `<button class="btn" type="button" data-view="create">＋ Create New Website</button>`) + `<div class="card">${websiteTable(websites)}</div>` }
+    function renderSimple(title, sub, icon, text) { app.innerHTML = header(title, sub) + `<div class="card empty"><div style="font-size:42px;margin-bottom:12px">${icon}</div><h2 style="color:var(--text)">${text}</h2><p>No backend is connected in this UI-only demo.</p><button class="btn" type="button" data-view="dashboard">Back to Dashboard</button></div>` }
+    let state = { step: 1, industry: '', theme: '', domain: '', pages: { home: true, about: true, services: true, gallery: true, reviews: true, contact: true }, content: {}, contentStep: 0 };
+    function resetBuilder(industry = '') { state = { step: 1, industry: industry || '', theme: '', domain: '', pages: { home: true, about: true, services: true, gallery: true, reviews: true, contact: true }, content: {}, contentStep: 0 }; if (industry) state.step = 2; renderCreate() }
+    function renderCreate() {
+      let body = ''; const inds = Object.entries(industries);
+      if (state.step === 1) body = `<h2>Choose Industry</h2><p class="sub">Select the business category for your website.</p><div class="section-grid" style="margin-top:18px">${inds.map(([n, v]) => `<button type="button" class="industry ${state.industry === v.key ? 'selected' : ''}" data-pick-industry="${v.key}"><div class="industry-icon">${v.emoji}</div><h3>${n}</h3><div class="sub">3 themes available</div></button>`).join('')}</div>`;
+      if (state.step === 2) body = `<h2>Choose Theme</h2><p class="sub">Select a theme, then click Next to continue.</p><div class="themegrid" style="margin-top:18px">${[1, 2, 3].map(n => `<div class="theme-card ${state.theme === `Theme-${n}` ? 'selected' : ''}"><div class="theme-preview">${industries[Object.keys(industries).find(k => industries[k].key === state.industry)]?.emoji || '🎨'} Theme-${n}</div><h3>Theme-${n}</h3><div class="sub">${['Classic', 'Modern Split', 'Premium Bold'][n - 1]} layout</div><div class="theme-actions"><button type="button" class="btn small" data-pick-theme="Theme-${n}">${state.theme === `Theme-${n}` ? 'Selected' : 'Select'}</button><button type="button" class="btn secondary small" data-template-preview="${state.industry || 'Dental'}" data-template-theme="${n}">Preview</button></div></div>`).join('')}</div>`;
+      if (state.step === 3) body = `<h2>Website Details</h2><p class="sub">Enter the domain or subdomain for this website.</p><div class="field" style="max-width:650px;margin-top:18px"><label>Domain / Subdomain *</label><input id="domain" autocomplete="off" value="${escapeHtml(state.domain)}" placeholder="ortho.yoursite.com"><small class="sub">Example: clinic.yoursite.com</small></div>`;
+      if (state.step === 4) body = `<h2>Pages</h2><p class="sub">Choose which pages should be included.</p><div class="checkgrid" style="margin-top:18px">${Object.keys(state.pages).map(k => `<label class="check"><input type="checkbox" data-page="${k}" ${state.pages[k] ? 'checked' : ''}><span><b>${k[0].toUpperCase() + k.slice(1)}</b><br><small class="sub">Include this page</small></span></label>`).join('')}</div>`;
+      if (state.step === 5) {
+        const d = state.content; const groups = [
+          ['Home', ['clinicName', 'homeNav', 'tagline', 'heroTitle', 'heroText', 'bookText', 'heroImage']],
+          ['Header / Contact Info', ['phone', 'email', 'address', 'timings', 'contactNav']],
+          ['About Us', ['aboutNav', 'aboutTitle', 'aboutSubtitle', 'doctorName', 'qualification', 'about', 'aboutPoints', 'doctorImage']],
+          ['Services', ['servicesNav', 'servicesTitle', 'servicesSubtitle', 'services']],
+          ['Gallery', ['galleryNav', 'galleryTitle', 'gallerySubtitle', 'gallery']],
+          ['Patient Reviews', ['reviewsNav', 'reviewsTitle', 'reviewsSubtitle', 'reviews']],
+          ['Footer', ['footerQuote']]]; const labels = { clinicName: 'Clinic / Business Name', tagline: 'Hero Tagline', heroTitle: 'Hero Main Heading', heroText: 'Hero Description', bookText: 'Appointment Button Text', heroImage: 'Hero Image URL', phone: 'Phone Number', email: 'Email Address', address: 'Clinic Address', timings: 'Opening Hours', doctorName: 'Doctor / Specialist Name', qualification: 'Qualification', about: 'About Us Content', aboutPoints: 'About Highlights (one per line)', doctorImage: 'Doctor Image URL', services: 'Services (one per line: Name | Description)', gallery: 'Gallery Image URLs (one per line)', reviews: 'Patient Reviews (one per line: Name | Review)', footerQuote: 'Footer Quote', homeNav: 'Home Navigation Label', aboutNav: 'About Navigation Label', servicesNav: 'Services Navigation Label', galleryNav: 'Gallery Navigation Label', reviewsNav: 'Reviews Navigation Label', contactNav: 'Contact Navigation Label', aboutTitle: 'About Section Title', aboutSubtitle: 'About Section Subtitle', servicesTitle: 'Services Section Title', servicesSubtitle: 'Services Section Subtitle', galleryTitle: 'Gallery Section Title', gallerySubtitle: 'Gallery Section Subtitle', reviewsTitle: 'Reviews Section Title', reviewsSubtitle: 'Reviews Section Subtitle', contactTitle: 'Contact Section Title', contactSubtitle: 'Contact Section Subtitle', footerServicesTitle: 'Footer Services Heading', footerLinksTitle: 'Footer Quick Links Heading', footerContactTitle: 'Footer Contact Heading' }; const area = ['heroText', 'timings', 'about', 'aboutPoints', 'services', 'gallery', 'reviews', 'footerQuote']; const pageFor = { Home: 'home', 'About Us': 'about', 'Services': 'services', 'Gallery': 'gallery', 'Patient Reviews': 'reviews', 'Header / Contact Info': 'contact', 'Footer': 'home' }; const available = groups.filter(([g]) => !pageFor[g] || state.pages[pageFor[g]]); if (state.contentStep >= available.length) state.contentStep = 0; const active = available[state.contentStep] || available[0]; const activeName = active ? active[0] : 'Home'; const activeKeys = active ? active[1] : []; body = `<h2>Website Content</h2><p class="sub">Edit your website content using the same wizard-style flow as Industry, Theme and Domain.</p><div class="content-wizard-steps">${available.map(([g], i) => `<button type="button" class="content-step ${i === state.contentStep ? 'on' : ''} ${i < state.contentStep ? 'done' : ''}" data-content-step="${i}"><span>${i < state.contentStep ? '✓' : i + 1}</span><b>${g}</b></button>`).join('')}</div><div class="content-editor"><div class="cardhead"><div><h3 style="margin:0">${activeName}</h3><div class="sub">Edit all content for this section.</div></div><span class="status">${state.contentStep + 1} / ${available.length}</span></div><div class="fieldgrid" style="margin-top:14px">${activeKeys.map(k => `<div class="field ${area.includes(k) ? 'full' : ''}"><label>${labels[k]}${['clinicName', 'doctorName'].includes(k) ? ' *' : ''}</label>${area.includes(k) ? `<textarea rows="${['services', 'reviews', 'gallery', 'aboutPoints'].includes(k) ? 6 : 4}" data-content="${k}" placeholder="Enter ${labels[k].toLowerCase()}">${escapeHtml(d[k] || '')}</textarea>` : `<input data-content="${k}" value="${escapeHtml(d[k] || '')}" placeholder="Enter ${labels[k].toLowerCase()}">`}</div>`).join('')}</div></div>`
+      }
+      if (state.step === 6) body = `<h2>Review & Publish</h2><p class="sub">Review your website and choose Save Draft or Save & Publish.</p><div class="card" style="margin-top:18px;background:#fafaff"><div class="tablewrap"><table class="table"><tr><th>Domain</th><td>${escapeHtml(state.domain)}</td></tr><tr><th>Industry</th><td>${escapeHtml(templateNames[state.industry] || state.industry)}</td></tr><tr><th>Theme</th><td>${escapeHtml(state.theme)}</td></tr><tr><th>Pages</th><td>${Object.entries(state.pages).filter(x => x[1]).map(x => escapeHtml(x[0])).join(', ') || 'None selected'}</td></tr><tr><th>Business</th><td>${escapeHtml(state.content.clinicName || '—')}</td></tr></table></div></div>`;
+      const nav = state.step < 6 ? `<div class="actions"><button type="button" class="btn secondary" id="backBtn" ${state.step === 1 ? 'disabled' : ''}>← Back</button><button type="button" class="btn" id="nextBtn">Next →</button></div>` : `<div class="actions"><button type="button" class="btn secondary" id="backBtn">← Back</button><div class="right"><button type="button" class="btn secondary" id="previewBuilderBtn">Preview Website</button><button type="button" class="btn secondary" id="saveDraftBtn">Save Draft</button><button type="button" class="btn" id="publishBtn">Save & Publish ✓</button></div></div>`;
+      app.innerHTML = header('Create New Website', 'Build your website step by step.') + `<div class="steps">${['Industry', 'Theme', 'Domain', 'Pages', 'Content', 'Publish'].map((x, i) => `<div class="step ${state.step === i + 1 ? 'on' : state.step > i + 1 ? 'done' : ''}"><i>${state.step > i + 1 ? '✓' : i + 1}</i><span>${x}</span></div>`).join('')}</div><div class="card">${body}</div>${nav}`; bindWizardButtons()
+    }
+    function syncForm() { $$('[data-content]').forEach(x => state.content[x.dataset.content] = x.value); $$('[data-page]').forEach(x => state.pages[x.dataset.page] = x.checked); const d = $('#domain'); if (d) state.domain = d.value.trim(); }
+    function validateDomain(d) { return /^(?=.{3,253}$)([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/.test(d) }
+    function next() { syncForm(); if (state.step === 1 && !state.industry) { toast('Please select an industry.', true); return } if (state.step === 2 && !state.theme) { toast('Please select a theme.', true); return } if (state.step === 3) { if (!state.domain) { toast('Please enter a domain.', true); return } if (!validateDomain(state.domain)) { toast('Enter a valid domain like clinic.yoursite.com.', true); return } } if (state.step === 4 && !Object.values(state.pages).some(Boolean)) { toast('Select at least one page.', true); return } if (state.step === 5) { const groups = [['Home', 'home'], ['Header / Contact Info', 'contact'], ['About Us', 'about'], ['Services', 'services'], ['Gallery', 'gallery'], ['Patient Reviews', 'reviews'], ['Footer', 'home']]; const available = groups.filter(([g, p]) => !['Home', 'Footer'].includes(g) || state.pages[p]); if (state.contentStep < available.length - 1) { state.contentStep++; renderCreate(); return } if (!state.content.clinicName?.trim() || (state.pages.about && !state.content.doctorName?.trim())) { toast('Business name and specialist name are required.', true); return } } if (state.step < 6) { state.step++; renderCreate() } }
+    function chooseIndustry(v) { state.industry = v; state.theme = ''; state.content = {}; state.step = 2; renderCreate(); toast(`${templateNames[v]} selected.`) }
+    function chooseTheme(v) { state.theme = v; renderCreate(); toast(`${v} selected. Click Next to enter your domain.`) }
+    function createRecord(status) { syncForm(); const id = 'site-' + Date.now(); const rec = { id, domain: state.domain, industry: templateNames[state.industry], industryKey: state.industry, theme: state.theme, status, createdAt: new Date().toLocaleString(), content: { ...state.content }, pages: { ...state.pages }, tpl: `${state.industry}-${state.theme.split('-')[1]}` }; websites = websites.filter(w => w.domain !== rec.domain); websites.unshift(rec); save(); activity.unshift({ text: `${rec.domain} ${status === 'Published' ? 'published' : 'saved as draft'}`, time: 'Just now' }); activity = activity.slice(0, 20); localStorage.setItem(activityKey, JSON.stringify(activity)); return rec }
+    function saveDraft() { if (state.step !== 6) { return } const rec = createRecord('Draft'); toast('Draft saved successfully ✓'); setTimeout(() => show('websites'), 450); return rec }
+    function publish() { if (state.step !== 6) return; const rec = createRecord('Published'); toast('Website saved and published ✓'); setTimeout(() => show('websites'), 450); return rec }
+    function openPreview(industry, themeNo = '1', siteData = null) {
+      const id = siteData?.id || ('preview-' + Date.now()); const tpl = `${industry}-${themeNo}`; if (!siteData) { const temp = { id, domain: state.domain || 'preview.local', industry: templateNames[industry], industryKey: industry, theme: `Theme-${themeNo}`, status: 'Preview', content: { ...state.content }, pages: { ...state.pages }, tpl }; const arr = loadWebsites(); arr.unshift(temp); localStorage.setItem(storageKey, JSON.stringify(arr)); }
+      const root = document.createElement('div'); root.className = 'modal'; root.innerHTML = `<div class="modalbox"><div class="modalbar"><div><b>${escapeHtml(templateNames[industry] || industry)} — ${escapeHtml(siteData?.theme || `Theme-${themeNo}`)}</b><span class="sub" style="margin-left:8px">Preview</span></div><button class="btn secondary small" type="button" id="closeModal">Close</button></div><iframe src="templates/${industry}.html?site=${encodeURIComponent(id)}&tpl=${encodeURIComponent(tpl)}" title="Website preview"></iframe></div>`; $('#modalRoot').append(root); root.querySelector('#closeModal').onclick = () => { root.remove(); if (!siteData) { websites = loadWebsites().filter(w => w.id !== id); save() } }
+    }
+    function openWebsite(id) { const w = websites.find(x => x.id === id); if (!w) return; openPreview(w.industryKey || String(w.industry).toLowerCase(), (w.theme || 'Theme-1').split('-')[1], w) }
+    function deleteWebsite(id) { const w = websites.find(x => x.id === id); if (!w) return; if (!confirm(`Delete ${w.domain}?`)) return; websites = websites.filter(x => x.id !== id); save(); activity.unshift({ text: `${w.domain} deleted`, time: 'Just now' }); activity = activity.slice(0, 20); localStorage.setItem(activityKey, JSON.stringify(activity)); toast('Website deleted.'); show('websites') }
+    function toast(msg, error = false) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; t.style.background = error ? '#a92d45' : '#182038'; document.body.append(t); setTimeout(() => t.remove(), 2400) }
+    function bindWizardButtons() { const nextBtn = $('#nextBtn'); if (nextBtn) nextBtn.onclick = e => { e.preventDefault(); next() }; $$('[data-content-step]').forEach(b => b.addEventListener('click', () => { syncForm(); state.contentStep = Number(b.dataset.contentStep); renderCreate() })); const backBtn = $('#backBtn'); if (backBtn) backBtn.onclick = e => { e.preventDefault(); syncForm(); if (state.step === 5 && state.contentStep > 0) { state.contentStep--; renderCreate(); return } if (state.step > 1) { state.step--; renderCreate() } else show('dashboard') }; const pub = $('#publishBtn'); if (pub) pub.onclick = e => { e.preventDefault(); publish() }; const draft = $('#saveDraftBtn'); if (draft) draft.onclick = e => { e.preventDefault(); saveDraft() }; const prev = $('#previewBuilderBtn'); if (prev) prev.onclick = e => { e.preventDefault(); syncForm(); if (!state.industry || !state.theme) { toast('Select industry and theme first.', true); return } openPreview(state.industry, state.theme.split('-')[1] || '1') }; $$('[data-content]').forEach(x => x.addEventListener('input', () => { state.content[x.dataset.content] = x.value })); $$('[data-page]').forEach(x => x.addEventListener('change', () => { state.pages[x.dataset.page] = x.checked })) }
+    function show(view) { $$('.nav button').forEach(b => b.classList.toggle('active', b.dataset.view === view)); $('#sidebar').classList.remove('open'); $('#overlay').classList.remove('show'); if (view === 'dashboard') renderDashboard(); else if (view === 'templates') renderTemplates(); else if (view === 'websites') renderWebsites(); else if (view === 'create') resetBuilder(); else if (view === 'media') renderSimple('Media Library', 'Manage images and assets used by your websites.', '▣', 'Media Library'); else if (view === 'deployments') renderSimple('Deployments', 'Track published website deployments.', '↗', 'Deployment Center'); else if (view === 'settings') renderSimple('Settings', 'Workspace preferences and demo settings.', '⚙', 'Settings Center') }
+    document.addEventListener('click', e => { const b = e.target.closest('[data-view],[data-template-preview],[data-use],[data-preview-id],[data-delete-id],[data-pick-industry],[data-pick-theme]'); if (!b) return; if (b.dataset.view) { show(b.dataset.view); return } if (b.dataset.templatePreview) { openPreview(b.dataset.templatePreview, b.dataset.templateTheme || '1'); return } if (b.dataset.use) { resetBuilder(b.dataset.use); return } if (b.dataset.previewId) { openWebsite(b.dataset.previewId); return } if (b.dataset.deleteId) { deleteWebsite(b.dataset.deleteId); return } if (b.dataset.pickIndustry) { chooseIndustry(b.dataset.pickIndustry); return } if (b.dataset.pickTheme) { chooseTheme(b.dataset.pickTheme); return } });
+    $('#hamb').onclick = () => { $('#sidebar').classList.add('open'); $('#overlay').classList.add('show') }; $('#overlay').onclick = () => { $('#sidebar').classList.remove('open'); $('#overlay').classList.remove('show') }; $('#search').oninput = e => { const q = e.target.value.toLowerCase().trim(); show('templates'); if (q) $$('.template').forEach(c => c.style.display = c.textContent.toLowerCase().includes(q) ? '' : 'none') };
+    show('dashboard');
+  </script>
+
+</body>
+  
+</html>

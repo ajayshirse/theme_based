@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smile Dental Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:#1e293b;line-height:1.6;background:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+/* top bar */
+.topbar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:18px 36px;padding:18px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;color:var(--p)}
+.logo i{font-style:normal;font-size:34px}
+.infos{display:flex;flex-wrap:wrap;gap:14px 32px;margin-left:auto}
+.info{display:flex;gap:12px;align-items:center}
+.info .ic{width:42px;height:42px;border-radius:50%;background:var(--a);display:grid;place-items:center;font-size:18px;flex:none}
+.info small{display:block;color:var(--p);font-weight:600;font-size:13px}
+.info span{font-size:14px;font-weight:500}
+/* menu */
+nav.menu{background:#f8fafc;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:20}
+nav.menu .wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.links{display:flex;align-items:center;flex-wrap:wrap}
+.links a.l{display:block;padding:16px 14px;font-weight:600;font-size:15px;color:var(--p)}
+.dd{position:relative}
+.dd .m{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;min-width:240px;box-shadow:0 10px 25px rgba(0,0,0,.1);padding:6px;z-index:30}
+.dd:hover .m{display:block}
+.m a{display:block;padding:9px 12px;border-radius:8px;font-size:14px}
+.m a:hover{background:var(--a)}
+.btn{display:inline-block;background:var(--p);color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;border:0;cursor:pointer;font-family:inherit}
+nav.menu .btn{margin-left:auto}
+.burger{display:none;background:none;border:0;font-size:26px;color:var(--p);cursor:pointer;padding:10px}
+/* hero */
+.hero{padding:90px 0}
+.hero small{display:block;letter-spacing:.15em;font-weight:600;font-size:13px;text-transform:uppercase}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.15;margin:12px 0}
+.hero p{font-size:18px;max-width:560px;opacity:.9}
+.hero .btn{margin-top:22px}
+.v-classic .hero{background:var(--a);text-align:center}
+.v-classic .hero p{margin:0 auto}
+.v-split .hero{background:var(--a)}
+.v-split .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.art{background:var(--p);border-radius:28px;min-height:300px;display:grid;place-items:center;font-size:110px;background-size:cover;background-position:center}
+.v-bold .hero{background:linear-gradient(135deg,var(--p),color-mix(in srgb,var(--p) 55%,#fff));color:#fff;text-align:center}
+.v-bold .hero p{margin:0 auto}
+.v-bold .hero .btn{background:#fff;color:var(--p)}
+.hero.img{background-size:cover;background-position:center;color:#fff}
+.hero.img .btn{background:var(--p);color:#fff}
+/* sections */
+.sec{padding:70px 0}
+.sec.alt{background:var(--a)}
+h2.t{font-size:32px;color:var(--p);line-height:1.2}
+p.sub{color:#64748b;margin:6px 0 30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card{border:1px solid #e2e8f0;border-radius:14px;padding:22px;background:#fff}
+.card h3{font-size:18px;margin-bottom:6px}
+.card p{color:#475569;font-size:15px}
+.num{width:38px;height:38px;border-radius:10px;background:var(--p);color:#fff;font-weight:700;display:grid;place-items:center;margin-bottom:12px}
+.about{display:grid;grid-template-columns:1fr 1.3fr;gap:44px;align-items:center}
+.ph{background:var(--a);border-radius:24px;min-height:340px;display:grid;place-items:center;font-size:100px;background-size:cover;background-position:center}
+.pts{list-style:none;margin-top:16px}
+.pts li{padding:5px 0 5px 28px;position:relative;font-weight:500}
+.pts li:before{content:"✓";position:absolute;left:0;color:var(--p);font-weight:700}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,44%),1fr));gap:14px}
+.gal div,.gal img{width:100%;aspect-ratio:4/3;border-radius:14px;object-fit:cover;background:linear-gradient(135deg,var(--a),var(--p));display:grid;place-items:center;font-size:44px}
+.post{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;background:#fff}
+.post .im{height:160px;background:linear-gradient(135deg,var(--a),var(--p));background-size:cover;background-position:center;display:grid;place-items:center;font-size:54px}
+.post .bd{padding:20px}
+.post h3{font-size:18px;line-height:1.35;margin-bottom:6px}
+.post .dt{color:var(--p);font-size:13px;font-weight:600;margin-bottom:8px}
+.post p{color:#475569;font-size:15px}
+.stars{color:#f59e0b;letter-spacing:2px;margin-bottom:8px}
+.rv b{display:block;margin-top:12px;color:var(--p)}
+details.fq{border:1px solid #e2e8f0;border-radius:12px;padding:16px 20px;margin-bottom:12px;background:#fff}
+details.fq summary{font-weight:600;cursor:pointer}
+details.fq p{margin-top:10px;color:#475569}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.cl p{margin:10px 0}
+.form{display:flex;flex-direction:column;gap:12px}
+.form input,.form textarea{border:1px solid #cbd5e1;border-radius:10px;padding:12px 14px;font:inherit;width:100%}
+.form input:focus,.form textarea:focus{outline:2px solid var(--p);border-color:transparent}
+/* footer */
+.foot{background:var(--a);color:#334155;padding-top:60px;border-top:1px solid rgba(15,23,42,.06)}
+.fg{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:36px;padding-bottom:50px}
+.foot h4{color:var(--p);font-size:17px;margin-bottom:16px}
+.foot .fl a{display:block;padding:6px 0;font-size:15px;color:#475569}
+.foot .fl a:hover{color:var(--p)}
+.foot .logo{color:var(--p);margin-bottom:16px}
+.foot .q{font-size:15px;opacity:.85}
+.foot .ph2{color:var(--p);font-weight:600;font-size:18px;margin-top:14px}
+.copy{background:rgba(255,255,255,.7);color:#475569;padding:20px 0;font-size:14px}
+.fab{position:fixed;right:24px;bottom:24px;width:56px;height:56px;border-radius:50%;background:#ef4444;color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.25);z-index:40}
+/* edit drawer */
+#editBtn{position:fixed;left:20px;bottom:20px;z-index:90;background:#0f172a;color:#fff;border:0;border-radius:999px;padding:12px 20px;font:600 14px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;box-shadow:-10px 0 30px rgba(0,0,0,.25);z-index:100;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s}
+#drawer.open{transform:none}
+#drawer header{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid #e2e8f0}
+#drawer header h3{font-size:16px;margin-right:auto}
+#drawer header button{border:0;border-radius:8px;padding:8px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
+#saveBtn{background:#2563eb;color:#fff}
+#closeBtn{background:#f1f5f9}
+#st{font-size:12px;color:#d97706}
+#form{flex:1;overflow-y:auto;padding:10px 16px}
+#form details{border-bottom:1px solid #e2e8f0;padding:10px 0}
+#form summary{font-weight:700;cursor:pointer;padding:6px 0}
+#form label{display:block;font-size:12px;font-weight:600;color:#475569;margin:12px 0 4px}
+#form input,#form textarea{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:9px 11px;font:14px Inter,sans-serif}
+#form small{display:block;font-size:11px;color:#94a3b8;margin-top:3px}
+#drawer footer{padding:12px 16px;border-top:1px solid #e2e8f0}
+#resetBtn{background:none;border:1px solid #fca5a5;color:#dc2626;border-radius:8px;padding:8px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
+@media(max-width:860px){
+  .burger{display:block}
+  .links{display:none;order:3;width:100%;flex-direction:column;align-items:stretch}
+  .links.open{display:flex}
+  .dd .m{display:block;position:static;box-shadow:none;border:0;padding:0 0 0 14px}
+  nav.menu .btn{padding:10px 16px}
+  .about,.cg,.v-split .hero .wrap{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr 1fr}
+  .infos{margin-left:0}
+}
+@media(max-width:520px){.fg{grid-template-columns:1fr}.ph{min-height:220px;font-size:70px}.art{min-height:200px;font-size:80px}.hero{padding:60px 0}.sec{padding:50px 0}h2.t{font-size:26px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<button id="editBtn" hidden>✏️ Edit Content</button>
+<aside id="drawer">
+  <header><h3>Edit website content</h3><span id="st"></span><button id="saveBtn">Save</button><button id="closeBtn">✕</button></header>
+  <div id="form"></div>
+  <footer><button id="resetBtn">Reset to sample content</button></footer>
+</aside>
+
+<script>
+const CAT = 'Dental';
+const ART = '🦷';
+const DEFAULTS = {
+  "clinicName": "Smile Dental Clinic",
+  "doctorName": "Dr. Ananya Kulkarni",
+  "qualification": "BDS, MDS – Dental Surgeon",
+  "tagline": "Gentle care for every smile",
+  "heroTitle": "Healthy Teeth. Confident Smile.",
+  "heroText": "Modern, painless dental treatment for the whole family at affordable prices.",
+  "bookText": "Book an Appointment",
+  "heroImage": "",
+  "phone": "+91 98765 43210",
+  "email": "hello@smiledental.com",
+  "address": "12, MG Road, Pune, Maharashtra 411001",
+  "timings": "Mon–Sat: 9:00 AM – 8:00 PM\nSunday: By appointment",
+  "about": "We are a family dental clinic with over 10 years of experience. Our team uses modern equipment and gentle techniques so that every visit is comfortable and stress-free.",
+  "aboutPoints": "Experienced and friendly dentists\nLatest sterilised equipment\nPainless modern procedures\nAffordable treatment plans",
+  "doctorImage": "",
+  "services": "Root Canal Treatment | Save your natural tooth with a comfortable, painless procedure.\nDental Implants | Permanent, natural-looking replacement for missing teeth.\nGum Treatment | Care for bleeding, swollen or receding gums.\nSmile Designing | Cosmetic treatments for a brighter, even smile.\nDentures | Comfortable full and partial dentures.\nBraces & Aligners | Straighten your teeth at any age.",
+  "gallery": "",
+  "reviews": "Rohit S. | Very gentle doctor and a clean clinic. My root canal was completely painless.\nSneha P. | The staff explained everything clearly and the pricing was fair. Highly recommended.\nAmit K. | Brought my whole family here. Kids were comfortable and not scared at all.",
+  "footerQuote": "We are dedicated to delivering painless and advanced dental care in a comfortable setting at an affordable price."
+};
+const THEMES = {
+  "dental-1": {
+    "layout": "classic",
+    "p": "#0ea5e9",
+    "a": "#e0f2fe",
+    "d": "#0b2545"
+  },
+  "dental-2": {
+    "layout": "split",
+    "p": "#0d9488",
+    "a": "#ccfbf1",
+    "d": "#0f2e2b"
+  },
+  "dental-3": {
+    "layout": "bold",
+    "p": "#3b5bdb",
+    "a": "#e0e7ff",
+    "d": "#1e2a6b"
+  }
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } };
+const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } };
+const lines = s => String(s || '').split('\n').map(x => x.trim()).filter(Boolean);
+const parts = l => l.split('|').map(x => x.trim());
+const safeUrl = u => { u = String(u || '').trim(); return /^https?:\/\//i.test(u) ? encodeURI(u).replace(/['()]/g, ch => escape(ch)) : ''; };
+const br = s => esc(s).replace(/\n/g, '<br>');
+
+// ----- Which website / template are we showing? -----
+const params = new URLSearchParams(location.search);
+const siteId = params.get('site');
+const editMode = params.get('edit') === '1';
+const site = load('tb_sites', []).find(s => s.id === siteId) || null;
+const wanted = params.get('tpl');
+const tplId = site ? site.tpl : (THEMES[wanted] ? wanted : Object.keys(THEMES)[0]);
+const T = THEMES[tplId] || THEMES[Object.keys(THEMES)[0]];
+const demoKey = 'tb_demo_' + tplId;
+let content = { ...DEFAULTS, ...(site ? site.content : load(demoKey, {})) };
+let dirty = false;
+
+// ----- Render the website from `content` -----
+function render() {
+  const c = content;
+  const R = document.documentElement.style;
+  R.setProperty('--p', T.p); R.setProperty('--a', T.a); R.setProperty('--d', T.d);
+  document.title = c.clinicName;
+  const svc = lines(c.services).map(parts);
+  const revs = lines(c.reviews).map(parts);
+  const pts = lines(c.aboutPoints);
+  const gal = lines(c.gallery).map(safeUrl).filter(Boolean);
+  const hi = safeUrl(c.heroImage), di = safeUrl(c.doctorImage);
+
+  const hText = `<small>${esc(c.tagline)}</small><h1>${esc(c.heroTitle)}</h1><p>${esc(c.heroText)}</p><a class="btn" href="#appointment">${esc(c.bookText)}</a>`;
+  const hero = T.layout === 'split'
+    ? `<section class="hero" id="home"><div class="wrap"><div>${hText}</div><div class="art" style="${hi ? `background-image:url('${esc(hi)}')` : ''}">${hi ? '' : ART}</div></div></section>`
+    : `<section class="hero${hi ? ' img' : ''}" id="home" style="${hi ? `background-image:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('${esc(hi)}')` : ''}"><div class="wrap">${hText}</div></section>`;
+
+  const galleryHtml = gal.length
+    ? gal.map(u => `<img src="${esc(u)}" alt="Gallery photo" loading="lazy">`).join('')
+    : [1, 2, 3, 4, 5, 6].map(() => `<div>${ART}</div>`).join('');
+
+  const pageLinks = [['Home', '#home'], ['About Us', '#about'], ['Gallery', '#gallery'], ['Patient Reviews', '#reviews'], ['Contact Us', '#contact']];
+
+  $('app').className = 'v-' + T.layout;
+  $('app').innerHTML = `
+<header class="topbar"><div class="wrap">
+  <a class="logo" href="#home"><i>${ART}</i><span>${esc(c.clinicName)}</span></a>
+  <div class="infos">
+    <div class="info"><div class="ic">📞</div><div><small>Call for Appointment</small><span>${esc(c.phone)}</span></div></div>
+    <div class="info"><div class="ic">✉️</div><div><small>Email for Appointment</small><span>${esc(c.email)}</span></div></div>
+    <div class="info"><div class="ic">📍</div><div><small>Clinic Address</small><span>${esc(c.address)}</span></div></div>
+  </div>
+</div></header>
+
+<nav class="menu"><div class="wrap">
+  <button class="burger" aria-label="Menu">☰</button>
+  <div class="links" id="links">
+    <a class="l" href="#home">Home</a>
+    <a class="l" href="#about">About Us</a>
+    <div class="dd"><a class="l" href="#services">Services ▾</a><div class="m">${svc.map(s => `<a href="#services">${esc(s[0])}</a>`).join('')}</div></div>
+    <a class="l" href="#gallery">Gallery</a>
+    <a class="l" href="#reviews">Patient Reviews</a>
+    <a class="l" href="#contact">Contact Us</a>
+  </div>
+  <a class="btn" href="#appointment">📅 ${esc(c.bookText)}</a>
+</div></nav>
+
+${hero}
+
+<section class="sec" id="about"><div class="wrap about">
+  <div class="ph" style="${di ? `background-image:url('${esc(di)}')` : ''}">${di ? '' : '🩺'}</div>
+  <div>
+    <h2 class="t">About Us</h2>
+    <p class="sub"><b>${esc(c.doctorName)}</b> · ${esc(c.qualification)}</p>
+    <p>${br(c.about)}</p>
+    <ul class="pts">${pts.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+  </div>
+</div></section>
+
+<section class="sec alt" id="services"><div class="wrap">
+  <h2 class="t">Our Services</h2><p class="sub">Treatments we offer at ${esc(c.clinicName)}.</p>
+  <div class="grid">${svc.map((s, i) => `<div class="card"><div class="num">${i + 1}</div><h3>${esc(s[0])}</h3><p>${esc(s[1] || '')}</p></div>`).join('')}</div>
+</div></section>
+
+<section class="sec" id="gallery"><div class="wrap">
+  <h2 class="t">Gallery</h2><p class="sub">A look inside our clinic and our work.</p>
+  <div class="gal">${galleryHtml}</div>
+</div></section>
+
+<section class="sec alt" id="reviews"><div class="wrap">
+  <h2 class="t">Patient Reviews</h2><p class="sub">What our patients say about us.</p>
+  <div class="grid">${revs.map(r => `<div class="card rv"><div class="stars">★★★★★</div><p>${esc(r[1] || '')}</p><b>${esc(r[0])}</b></div>`).join('')}</div>
+</div></section>
+
+<section class="sec" id="contact"><div class="wrap">
+  <h2 class="t">Contact Us</h2><p class="sub">We would love to hear from you.</p>
+  <div class="cg">
+    <div class="card cl">
+      <h3>${esc(c.clinicName)}</h3>
+      <p>📍 ${esc(c.address)}</p><p>📞 ${esc(c.phone)}</p><p>✉️ ${esc(c.email)}</p><p>🕒 ${br(c.timings)}</p>
+    </div>
+    <form class="card form" id="appointment">
+      <h3>${esc(c.bookText)}</h3>
+      <input name="name" placeholder="Your name" required>
+      <input name="phone" placeholder="Phone number" required>
+      <input name="date" type="date">
+      <textarea name="msg" rows="3" placeholder="Message (optional)"></textarea>
+      <button class="btn" type="submit">${esc(c.bookText)}</button>
+    </form>
+  </div>
+</div></section>
+
+<footer class="foot">
+  <div class="wrap fg">
+    <div><a class="logo" href="#home"><i>${ART}</i><span>${esc(c.clinicName)}</span></a><p class="q">“${esc(c.footerQuote)}”</p></div>
+    <div class="fl"><h4>Our Services</h4>${svc.slice(0, 5).map(s => `<a href="#services">${esc(s[0])}</a>`).join('')}</div>
+    <div class="fl"><h4>Quick Links</h4>${pageLinks.map(l => `<a href="${l[1]}">${l[0]}</a>`).join('')}</div>
+    <div><h4>Our Contacts</h4><p>${esc(c.address)}</p><p class="ph2">📞 ${esc(c.phone)}</p></div>
+  </div>
+  <div class="copy"><div class="wrap">© ${new Date().getFullYear()} ${esc(c.clinicName)}. All rights reserved.</div></div>
+</footer>
+<a class="fab" href="#appointment" title="${esc(c.bookText)}">+</a>`;
+}
+
+// ----- Site behaviour (menu, appointment form) -----
+document.addEventListener('click', e => {
+  if (e.target.closest('.burger')) $('links').classList.toggle('open');
+  else if (e.target.closest('#links a')) $('links').classList.remove('open');
+});
+document.addEventListener('submit', e => {
+  if (e.target.id !== 'appointment') return;
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  const list = load('tb_appointments', []);
+  list.unshift({ site: siteId || tplId, ...f, ts: Date.now() });
+  save('tb_appointments', list);   // later: send to your backend / email
+  e.target.reset();
+  alert('Thank you! We have received your request and will call you soon.');
+});
+
+// ----- Content form (only when opened with ?edit=1 from the dashboard) -----
+const GROUPS = [
+  ['Clinic Details', [['clinicName', 'Clinic Name', 'text'], ['doctorName', 'Doctor Name', 'text'], ['qualification', 'Qualification', 'text'], ['phone', 'Phone', 'text'], ['email', 'Email', 'text'], ['address', 'Address', 'text'], ['timings', 'Timings', 'area']]],
+  ['Home Banner', [['tagline', 'Small Tagline', 'text'], ['heroTitle', 'Main Heading', 'text'], ['heroText', 'Short Text', 'area'], ['bookText', 'Button Text', 'text'], ['heroImage', 'Banner Image URL (optional)', 'text']]],
+  ['About Us', [['about', 'About Us Text', 'area'], ['aboutPoints', 'Highlights', 'area', 'One point per line'], ['doctorImage', 'Doctor Photo URL (optional)', 'text']]],
+  ['Services', [['services', 'Services', 'area', 'One per line:  Name | Short description']]],
+  ['Gallery', [['gallery', 'Gallery Images', 'area', 'One image URL per line (http/https)']]],
+  ['Patient Reviews', [['reviews', 'Reviews', 'area', 'One per line:  Patient name | Review']]],
+  ['Footer', [['footerQuote', 'Footer Quote', 'area']]],
+];
+function buildForm() {
+  $('form').innerHTML = GROUPS.map((g, gi) => `<details ${gi === 0 ? 'open' : ''}><summary>${g[0]}</summary>${g[1].map(([k, l, t, h]) =>
+    `<label>${l}</label>${t === 'area' ? `<textarea data-k="${k}" rows="${h ? 6 : 4}">${esc(content[k])}</textarea>` : `<input data-k="${k}" value="${esc(content[k])}">`}${h ? `<small>${h}</small>` : ''}`).join('')}</details>`).join('');
+}
+function setDirty(v) { dirty = v; $('st').textContent = v ? 'Unsaved' : ''; }
+function saveAll() {
+  if (site) {
+    const all = load('tb_sites', []), i = all.findIndex(s => s.id === site.id);
+    if (i > -1) {
+      all[i].content = { ...content }; all[i].ts = Date.now(); save('tb_sites', all);
+      const act = load('tb_activity', []);
+      act.unshift({ t: 'Content updated', d: all[i].name + ' content was edited.', i: 'edit', c: 'bg-orange-50 text-orange-500', ts: Date.now() });
+      save('tb_activity', act.slice(0, 20));
+    }
+  } else save(demoKey, content);
+  setDirty(false); $('st').textContent = 'Saved ✓'; setTimeout(() => { if (!dirty) $('st').textContent = ''; }, 2000);
+}
+if (editMode) {
+  $('editBtn').hidden = false;
+  buildForm();
+  $('drawer').classList.add('open');
+  $('editBtn').onclick = () => $('drawer').classList.toggle('open');
+  $('closeBtn').onclick = () => $('drawer').classList.remove('open');
+  $('saveBtn').onclick = saveAll;
+  $('form').addEventListener('input', e => { const k = e.target.dataset.k; if (!k) return; content[k] = e.target.value; setDirty(true); render(); });
+  $('resetBtn').onclick = () => { if (!confirm('Replace all content with the sample content?')) return; content = { ...DEFAULTS, clinicName: content.clinicName }; buildForm(); setDirty(true); render(); };
+  window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+}
+// Live content pushed from the dashboard form (preview)
+window.addEventListener('message', e => { const m = e.data; if (m && m.tbContent) { content = { ...DEFAULTS, ...m.tbContent }; render(); } });
+render();
+</script>
+</body>
+</html>
